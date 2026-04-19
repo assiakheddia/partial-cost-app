@@ -969,132 +969,158 @@ with tabs[2]:
 # §4 GRAND LIVRE
 # ─────────────────────────────────────────────────────────────────────────────
 with tabs[3]:
-    st.markdown(
-        '<div class="section-title">Grand Livre — Comptes principaux</div>',
-        unsafe_allow_html=True,
-    )
-
+    st.markdown('<div class="section-title">Grand Livre — Comptes principaux</div>', unsafe_allow_html=True)
+ 
+    # ── Colonnes communes à tous les comptes en T ──────────────────────────────
+    COL_T = ["N° Op.", "Libellé", "Débit (DA)", "Crédit (DA)", "Solde cumulé (DA)"]
+ 
     comptes = {
         "411 — Clients et comptes rattachés": {
-            "nature": "Solde débiteur : 7 500 000 DA",
-            "col_d": "Débit",
-            "col_c": "Crédit",
+            "num": "411",
+            "nature": "Solde DÉBITEUR final : 7 500 000 DA",
             "data": {
-                "Libellé": [
-                    "Solde d'ouverture",
-                    "Op.3 — Vente PF",
-                    "Op.6 — Vente PF",
-                    "Op.10 — Vente PF",
-                    "TOTAL",
-                    "SOLDE",
-                ],
-                "Débit (DA)": [
-                    "2 400 000",
-                    "5 500 000",
-                    "4 500 000",
-                    "6 000 000",
-                    "18 400 000",
-                    "7 500 000",
-                ],
-                "Crédit (DA)": ["—", "—", "—", "—", "—", "—"],
-                "Contrepartie (Crédit)": [
-                    "—",
-                    "Op.4 — Encaiss. 2 400 000",
-                    "Op.8 — Encaiss. 3 000 000",
-                    "Op.12 — Encaiss. 5 500 000",
-                    "10 900 000",
-                    "—",
-                ],
-            },
+                "N° Op.":  ["—",   "Op.3",  "Op.4",         "Op.6",  "Op.8",         "Op.10", "Op.12",        "TOTAL", "SOLDE DÉBITEUR"],
+                "Libellé": ["Solde d'ouverture",
+                            "Vente PF à crédit", "Encaissement client",
+                            "Vente PF à crédit", "Encaissement client",
+                            "Vente PF à crédit", "Encaissement client",
+                            "—", "—"],
+                "Débit (DA)":  ["2 400 000", "5 500 000", "—",         "4 500 000", "—",         "6 000 000", "—",         "18 400 000", "7 500 000"],
+                "Crédit (DA)": ["—",         "—",         "2 400 000", "—",         "3 000 000", "—",         "5 500 000", "10 900 000", "—"],
+                "Solde cumulé (DA)": ["2 400 000", "7 900 000", "5 500 000", "10 000 000", "7 000 000", "13 000 000", "7 500 000", "—", "7 500 000"],
+            }
         },
         "512 — Banque": {
-            "nature": "Solde débiteur : 5 640 000 DA",
+            "num": "512",
+            "nature": "Solde DÉBITEUR final : 5 640 000 DA",
             "data": {
-                "Libellé": [
-                    "Solde d'ouverture",
-                    "Op.4 — Encaiss. client",
-                    "Op.8 — Encaiss. client",
-                    "Op.12 — Encaiss. client",
-                    "TOTAL",
-                    "SOLDE",
-                ],
-                "Débit (DA)": [
-                    "1 500 000",
-                    "2 400 000",
-                    "3 000 000",
-                    "5 500 000",
-                    "12 400 000",
-                    "5 640 000",
-                ],
-                "Crédit (DA)": [
-                    "—",
-                    "Op.2 — Fourn. 1 200 000",
-                    "Op.7 — Achat 2 200 000",
-                    "Op.9 Loyer 480 000 / Op.13 Fourn. 2 400 000 / Op.14 Loyer 480 000",
-                    "6 760 000",
-                    "—",
-                ],
-                "Contrepartie (Crédit)": ["—", "—", "—", "—", "—", "—"],
-            },
+                "N° Op.":  ["—",   "Op.2",           "Op.4",             "Op.7",             "Op.8",             "Op.9",           "Op.12",            "Op.13",            "Op.14",          "TOTAL",     "SOLDE DÉBITEUR"],
+                "Libellé": ["Solde d'ouverture",
+                            "Règlt fournisseur", "Encaiss. client",
+                            "Achat MP comptant", "Encaiss. client",
+                            "Paiement loyer",    "Encaiss. client",
+                            "Règlt fournisseur", "Paiement loyer",
+                            "—", "—"],
+                "Débit (DA)":  ["1 500 000", "—",         "2 400 000", "—",         "3 000 000", "—",       "5 500 000", "—",         "—",       "12 400 000", "5 640 000"],
+                "Crédit (DA)": ["—",         "1 200 000", "—",         "2 200 000", "—",         "480 000", "—",         "2 400 000", "480 000", "6 760 000",  "—"],
+                "Solde cumulé (DA)": ["1 500 000","300 000","2 700 000","500 000","3 500 000","3 020 000","8 520 000","6 120 000","5 640 000","—","5 640 000"],
+            }
         },
-        "401 — Fournisseurs": {
-            "nature": "Solde créditeur : 1 200 000 DA",
+        "401 — Fournisseurs et comptes rattachés": {
+            "num": "401",
+            "nature": "Solde CRÉDITEUR final : 1 200 000 DA",
             "data": {
-                "Libellé": [
-                    "Solde d'ouverture",
-                    "Op.2 — Règlement",
-                    "Op.13 — Règlement",
-                    "TOTAL",
-                    "SOLDE",
-                ],
-                "Débit (DA)": ["—", "1 200 000", "2 400 000", "3 600 000", "—"],
-                "Crédit (DA)": ["1 200 000", "—", "—", "—", "—"],
-                "Contrepartie (Débit)": ["—", "—", "—", "—", "—"],
-            },
+                "N° Op.":  ["—",   "Op.1",             "Op.2",             "Op.13",            "TOTAL",     "SOLDE CRÉDITEUR"],
+                "Libellé": ["Solde d'ouverture (dette initiale)",
+                            "Achat MP à crédit", "Règlement fourn.",
+                            "Règlement fourn.", "—", "—"],
+                "Débit (DA)":  ["—",         "—",         "1 200 000", "2 400 000", "3 600 000", "—"],
+                "Crédit (DA)": ["1 200 000", "3 600 000", "—",         "—",         "4 800 000", "1 200 000"],
+                "Solde cumulé (DA)": ["1 200 000 C","4 800 000 C","3 600 000 C","1 200 000 C","—","1 200 000"],
+            }
+        },
+        "601 — Achats de matières premières": {
+            "num": "601",
+            "nature": "Solde DÉBITEUR final : 5 800 000 DA",
+            "data": {
+                "N° Op.":  ["Op.1",             "Op.7",             "TOTAL",     "SOLDE DÉBITEUR"],
+                "Libellé": ["Achat MP à crédit (fournisseur)",
+                            "Achat MP comptant (banque)", "—", "—"],
+                "Débit (DA)":  ["3 600 000", "2 200 000", "5 800 000", "5 800 000"],
+                "Crédit (DA)": ["—",         "—",         "—",         "—"],
+                "Solde cumulé (DA)": ["3 600 000","5 800 000","—","5 800 000"],
+            }
+        },
+        "613 — Charges locatives (Loyers)": {
+            "num": "613",
+            "nature": "Solde DÉBITEUR final : 960 000 DA",
+            "data": {
+                "N° Op.":  ["Op.9",           "Op.14",          "TOTAL",    "SOLDE DÉBITEUR"],
+                "Libellé": ["Paiement loyer T1 (banque)",
+                            "Paiement loyer T2 (banque)", "—", "—"],
+                "Débit (DA)":  ["480 000", "480 000", "960 000", "960 000"],
+                "Crédit (DA)": ["—",       "—",       "—",       "—"],
+                "Solde cumulé (DA)": ["480 000","960 000","—","960 000"],
+            }
+        },
+        "641 — Charges de personnel": {
+            "num": "641",
+            "nature": "Solde DÉBITEUR final : 1 600 000 DA",
+            "data": {
+                "N° Op.":  ["Op.5",                        "Op.11",                       "TOTAL",     "SOLDE DÉBITEUR"],
+                "Libellé": ["Paiement salaires (caisse) — Semestre 1",
+                            "Paiement salaires (caisse) — Semestre 2", "—", "—"],
+                "Débit (DA)":  ["800 000", "800 000", "1 600 000", "1 600 000"],
+                "Crédit (DA)": ["—",       "—",       "—",         "—"],
+                "Solde cumulé (DA)": ["800 000","1 600 000","—","1 600 000"],
+            }
+        },
+        "681 — Dotations aux amortissements": {
+            "num": "681",
+            "nature": "Solde DÉBITEUR final : 1 200 000 DA",
+            "data": {
+                "N° Op.":  ["Op.15",                                       "TOTAL",     "SOLDE DÉBITEUR"],
+                "Libellé": ["Dotation amortissement annuel (fin exercice)", "—",         "—"],
+                "Débit (DA)":  ["1 200 000", "1 200 000", "1 200 000"],
+                "Crédit (DA)": ["—",         "—",         "—"],
+                "Solde cumulé (DA)": ["1 200 000","—","1 200 000"],
+            }
         },
         "701 — Ventes de produits finis": {
-            "nature": "Solde créditeur : 16 000 000 DA (= CA)",
+            "num": "701",
+            "nature": "Solde CRÉDITEUR final : 16 000 000 DA  (= CA total)",
             "data": {
-                "Libellé": ["Op.3 — Vente", "Op.6 — Vente", "Op.10 — Vente", "TOTAL"],
-                "Débit (DA)": ["—", "—", "—", "0"],
-                "Crédit (DA)": ["5 500 000", "4 500 000", "6 000 000", "16 000 000"],
-                "Note": ["Clients 411", "Clients 411", "Clients 411", "= CA total"],
-            },
+                "N° Op.":  ["Op.3",             "Op.6",             "Op.10",            "TOTAL",     "SOLDE CRÉDITEUR"],
+                "Libellé": ["Vente PF à crédit", "Vente PF à crédit", "Vente PF à crédit", "—",      "= Chiffre d'affaires N"],
+                "Débit (DA)":  ["—",         "—",         "—",         "0",         "—"],
+                "Crédit (DA)": ["5 500 000", "4 500 000", "6 000 000", "16 000 000","16 000 000"],
+                "Solde cumulé (DA)": ["5 500 000 C","10 000 000 C","16 000 000 C","—","16 000 000"],
+            }
         },
     }
-
+ 
     for compte_name, info in comptes.items():
-        st.markdown(
-            f"""
-        <div class="gl-header">
-        <strong>{compte_name}</strong>
-        <span>{info['nature']}</span>
-        </div>""",
-            unsafe_allow_html=True,
-        )
+        # En-tête coloré avec numéro de compte bien visible
+        is_credit = "CRÉDITEUR" in info["nature"]
+        header_color = "#b91c1c" if is_credit else "#1d4ed8"
+        badge_color  = "#fee2e2" if is_credit else "#dbeafe"
+        badge_text   = "#b91c1c" if is_credit else "#1d4ed8"
+        st.markdown(f"""
+        <div style="display:flex; justify-content:space-between; align-items:center;
+             background:{header_color}; color:white; padding:14px 20px;
+             border-radius:10px 10px 0 0; margin-top:2rem;">
+          <div style="display:flex; align-items:center; gap:16px;">
+            <span style="background:rgba(255,255,255,0.25); color:white;
+                  font-size:20px; font-weight:800; padding:4px 14px;
+                  border-radius:6px; font-family:'Courier New',monospace;">
+              {info['num']}
+            </span>
+            <strong style="font-size:18px;">{compte_name.split(' — ',1)[1]}</strong>
+          </div>
+          <span style="background:{badge_color}; color:{badge_text};
+                font-size:14px; font-weight:700; padding:5px 14px;
+                border-radius:20px;">
+            {info['nature']}
+          </span>
+        </div>""", unsafe_allow_html=True)
+ 
         df_gl = pd.DataFrame(info["data"])
-
+ 
         def style_gl(row):
-            if row["Libellé"] in ["TOTAL", "SOLDE"]:
-                return ["font-weight:bold;background:#f5f0e8"] * len(row)
+            if row["N° Op."] in ["TOTAL", "SOLDE DÉBITEUR", "SOLDE CRÉDITEUR"]:
+                return ["font-weight:700; background:#1e3a8a; color:white"] * len(row)
+            if row["N° Op."] == "—" and row["Libellé"] == "Solde d'ouverture":
+                return ["background:#eff6ff; font-style:italic"] * len(row)
             return [""] * len(row)
-
-        st.dataframe(
-            df_gl.style.apply(style_gl, axis=1),
-            use_container_width=True,
-            hide_index=True,
-        )
-
-    st.markdown(
-        """
-    <div class="result-box success">
-    Le solde créditeur du compte 701 (16 000 000 DA) correspond au <b>Chiffre d'affaires total</b>
-    de l'exercice N et alimente directement le TCR.
-    </div>""",
-        unsafe_allow_html=True,
-    )
-
-
+ 
+        st.dataframe(df_gl.style.apply(style_gl, axis=1), use_container_width=True, hide_index=True)
+ 
+    st.markdown("""
+    <div class="result-box success" style="margin-top:1.5rem;">
+    ✔ <b>8 comptes présentés</b> — Les soldes du grand livre alimentent directement la balance et le TCR.<br>
+    Le solde créditeur du compte 701 (16 000 000 DA) = <b>Chiffre d'affaires total de l'exercice N</b>.
+    </div>""", unsafe_allow_html=True)
+ 
 # ─────────────────────────────────────────────────────────────────────────────
 # §5 BALANCE
 # ─────────────────────────────────────────────────────────────────────────────
