@@ -956,13 +956,7 @@ with tabs[2]:
         use_container_width=True,
         hide_index=True,
     )
-    st.markdown(
-        """
-    <div class="result-box info">
-    <b>Légende :</b> Fond vert = opérations de vente (produits) · Fond jaune = opérations de clôture (fin d'exercice)
-    </div>""",
-        unsafe_allow_html=True,
-    )
+    
 
 
 # ─────────────────────────────────────────────────────────────────────────────
